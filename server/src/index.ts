@@ -13,6 +13,12 @@ import { migrateToLatest } from './db/migrator.js';
 export const app = express();
 
 const SECRET = process.env.JWT_SECRET || 'thisisasecret';
+if (process.env.NODE_ENV === 'production') {
+  if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET is required in production');
+  if (!process.env.DB_CONNECTION_STRING) {
+    throw new Error('DB_CONNECTION_STRING is required in production');
+  }
+}
 
 app.use(express.json());
 
@@ -133,5 +139,6 @@ app.use(
 
 if (process.env.NODE_ENV !== 'test') {
   await migrateToLatest();
-  app.listen(8080, () => console.log('Service started on 8080'));
+  const port = Number(process.env.PORT || 8080);
+  app.listen(port, '0.0.0.0', () => console.log(`Service started on ${port}`));
 }

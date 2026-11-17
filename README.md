@@ -9,6 +9,8 @@
 
 ## Overview
 
+For the implementation checklist, exact deployment settings, and verification steps, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
 For this project, you will deploy the attached application to Render. Follow the instructions in this README to set up your application.
 
 ## Requirements

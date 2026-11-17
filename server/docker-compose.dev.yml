@@ -11,5 +11,7 @@ services:
       - 8080:8080
     environment:
       DB_CONNECTION_STRING: postgres://postgres:postgres@db:5432/module06demo
+      JWT_SECRET: local-development-secret-change-for-production
     depends_on:
-      - db
+      db:
+        condition: service_healthy
